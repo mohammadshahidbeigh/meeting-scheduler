@@ -86,6 +86,22 @@ export default function Home() {
     }
   }
 
+  const handleTabChange = (tab: 'instant' | 'scheduled') => {
+    // Only clear meeting details when switching to instant meeting tab
+    if (tab === 'instant') {
+      // Keep existing meeting details if they were from an instant meeting
+      if (activeTab === 'scheduled') {
+        setMeetingDetails(null)
+      }
+    } else {
+      // Always clear meeting details when switching to scheduled tab
+      setMeetingDetails(null)
+    }
+    
+    setActiveTab(tab)
+    setError('') // Always clear errors
+  }
+
   if (status === "loading") {
     return (
       <div className="flex h-screen items-center justify-center">
@@ -121,7 +137,7 @@ export default function Home() {
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2">
                   {session.user.image && (
-                    <Image
+        <Image
                       src={session.user.image}
                       alt="Profile"
                       width={32}
@@ -150,22 +166,24 @@ export default function Home() {
         <div className="bg-white rounded-xl shadow-sm border mb-8">
           <div className="grid grid-cols-2 gap-px bg-gray-200">
             <button
-              onClick={() => setActiveTab('instant')}
-              className={`px-4 py-3 text-sm font-medium rounded-tl-xl ${activeTab === 'instant'
-                  ? 'bg-white text-blue-600'
+              onClick={() => handleTabChange('instant')}
+              className={`px-4 py-3 text-sm font-medium rounded-tl-xl ${
+                activeTab === 'instant'
+                  ? 'bg-white text-gray-900'
                   : 'bg-gray-50 text-gray-500 hover:text-gray-700 hover:bg-gray-100'
-                }`}
+              }`}
             >
-              Instant Meeting
+              Start an Instant Meeting
             </button>
             <button
-              onClick={() => setActiveTab('scheduled')}
-              className={`px-4 py-3 text-sm font-medium rounded-tr-xl ${activeTab === 'scheduled'
-                  ? 'bg-white text-blue-600'
+              onClick={() => handleTabChange('scheduled')}
+              className={`px-4 py-3 text-sm font-medium rounded-tr-xl ${
+                activeTab === 'scheduled'
+                  ? 'bg-white text-gray-900'
                   : 'bg-gray-50 text-gray-500 hover:text-gray-700 hover:bg-gray-100'
-                }`}
+              }`}
             >
-              Schedule Meeting
+              Schedule a Meeting
             </button>
           </div>
 
@@ -307,8 +325,8 @@ export default function Home() {
                     </button>
                     <a
                       href={meetingDetails.meetingLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
+            target="_blank"
+            rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white 
                                rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm"
                     >
