@@ -40,6 +40,59 @@ npm install
 npm run dev
 ```
 
+# Project Structure
+
+This project follows a feature-first approach with Next.js 14/15 best practices. Here's an overview of the directory structure:
+
+```
+src/
+├── app/                    # Next.js app directory
+│   ├── (auth)/            # Authentication routes (grouped)
+│   │   ├── login/        # Login page
+│   │   └── error/        # Error page
+│   ├── api/              # API routes
+│   │   ├── auth/        # NextAuth API routes
+│   │   ├── instant-meeting/  # Instant meeting API
+│   │   └── schedule-meeting/ # Scheduled meeting API
+│   ├── layout.tsx        # Root layout
+│   └── page.tsx          # Home page
+├── components/           # Reusable components
+│   ├── instant-meeting.tsx  # Instant meeting component
+│   └── schedule-meeting.tsx # Scheduled meeting component
+├── lib/                 # Third-party library configurations
+│   └── auth.ts         # NextAuth configuration
+├── middleware/         # Middleware functions
+│   └── auth.ts        # Authentication middleware
+├── types/             # TypeScript type definitions
+└── styles/            # Global styles and CSS modules
+```
+
+## Directory Purposes
+
+- **app/**: Contains all Next.js pages and layouts using the App Router
+  - **(auth)/**: Grouped authentication-related pages
+  - **api/**: API routes for handling meeting creation and authentication
+- **components/**: Reusable UI components
+  - `instant-meeting.tsx`: Component for creating instant meetings
+  - `schedule-meeting.tsx`: Component for scheduling future meetings
+- **lib/**: Third-party library configurations
+  - `auth.ts`: NextAuth.js configuration and setup
+- **middleware/**: Request middleware functions
+  - `auth.ts`: Authentication middleware for protected routes
+- **types/**: TypeScript type definitions and interfaces
+- **styles/**: Global styles and CSS modules
+
+## Best Practices
+
+1. Keep features isolated in their respective directories
+2. Use absolute imports with the `@/` alias
+3. Maintain clear separation of concerns
+4. Follow the principle of colocation
+5. Keep components small and focused
+6. Use TypeScript for type safety
+7. Implement proper error boundaries
+8. Follow Next.js routing conventions
+
 ### Deployment
 1. Push to GitHub
 2. Connect to Vercel

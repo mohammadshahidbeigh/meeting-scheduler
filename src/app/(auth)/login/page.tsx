@@ -12,10 +12,18 @@ export default function LoginPage() {
     try {
       setIsLoading(true)
       setError(null)
-      await signIn('google', { callbackUrl: '/' })
+      const result = await signIn('google', { 
+        callbackUrl: '/',
+        redirect: false // Prevent automatic redirect to handle errors
+      })
+      
+      if (result?.error) {
+        console.error('Sign in error:', result.error)
+        setError(`Authentication failed: ${result.error}`)
+      }
     } catch (err) {
-      setError('Failed to sign in. Please try again.')
       console.error('Sign in error:', err)
+      setError('Failed to sign in. Please try again.')
     } finally {
       setIsLoading(false)
     }

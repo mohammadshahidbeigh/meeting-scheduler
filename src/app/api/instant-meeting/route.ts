@@ -1,4 +1,4 @@
-import { auth } from '@/app/auth'
+import { auth } from '@/lib/auth'
 import { NextResponse } from 'next/server'
 import { createGoogleMeet } from '@/utils/googleCalendar'
 import { Session } from 'next-auth'
