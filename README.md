@@ -8,7 +8,7 @@ A streamlined meeting scheduling application built with Next.js that integrates 
 - **Frontend**: Next.js 15 with App Router
 - **Authentication**: NextAuth.js with Google OAuth
 - **Styling**: Tailwind CSS
-- **API Integration**: Google Calendar API for meeting management
+- **API Integration**: Google Calendar API accessed through Google OAuth for meeting management
 - **Deployment**: Vercel
 
 ### Key Design Decisions
@@ -33,6 +33,9 @@ GOOGLE_CLIENT_SECRET=your_client_secret
 NEXTAUTH_SECRET=your_random_string
 NEXTAUTH_URL=http://localhost:3000
 ```
+**Note**: Ensure that the OAuth 2.0 credentials include the following scopes for Google Calendar access:
+- `https://www.googleapis.com/auth/calendar`
+- `https://www.googleapis.com/auth/calendar.events`
 
 ### Installation
 ```bash
