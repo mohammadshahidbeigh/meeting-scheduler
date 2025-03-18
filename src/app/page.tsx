@@ -91,7 +91,7 @@ export default function Home() {
                 <button
                   onClick={() => signOut()}
                   className="text-sm text-red-600 hover:text-red-700 font-medium px-4 py-2 
-                           border border-red-200 rounded-lg hover:bg-red-50 transition-all cursor-pointer"
+                           border border-red-200 rounded-lg hover:bg-red-200 transition-all cursor-pointer"
                 >
                   Sign Out
                 </button>
