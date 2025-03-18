@@ -29,7 +29,7 @@ export default function LoginPage() {
             Welcome to Meeting Scheduler
           </h2>
           <p className="mt-2 text-sm text-gray-600">
-            Sign in with your Google account to continue
+            Sign in with your Google account to continue 🔐
           </p>
         </div>
         
