@@ -63,7 +63,7 @@ export default function ScheduleMeeting({ onMeetingScheduled }: ScheduleMeetingP
   return (
     <div className="max-w-md mx-auto">
       <div className="mb-6">
-        <h2 className="text-lg font-semibold text-gray-900">Schedule a Meeting</h2>
+        <h2 className="text-xl font-semibold text-gray-900">Schedule a Meeting</h2>
         <p className="mt-1 text-sm text-gray-500">
           Plan a meeting for a future date and time
         </p>
@@ -100,9 +100,13 @@ export default function ScheduleMeeting({ onMeetingScheduled }: ScheduleMeetingP
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 
-                   disabled:bg-blue-300 transition-colors
-                   flex items-center justify-center gap-2 font-medium cursor-pointer"
+          className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 
+          disabled:bg-blue-300 transition-all duration-200
+          flex items-center justify-center gap-2 font-medium text-sm
+          shadow-sm hover:shadow disabled:shadow-none
+          transform hover:scale-105 disabled:scale-100
+          cursor-pointer disabled:cursor-not-allowed"
+
         >
           {isLoading ? (
             <>
