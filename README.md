@@ -40,7 +40,7 @@ npm install
 npm run dev
 ```
 
-# Project Structure
+# Code Architecture
 
 This project follows a feature-first approach with Next.js 14/15 best practices. Here's an overview of the directory structure:
 
