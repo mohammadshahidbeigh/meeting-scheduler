@@ -43,7 +43,7 @@ export default function InstantMeeting({ onMeetingCreated }: InstantMeetingProps
 
   return (
     <div className="text-center max-w-md mx-auto">
-      <div className="mb-6">
+      <div className="mb-4 sm:mb-6">
         <h2 className="text-lg font-bold text-gray-900 mb-1.5">Start an Instant Meeting</h2>
         <p className="text-sm text-gray-600">
           Create a meeting that starts right now
@@ -52,9 +52,9 @@ export default function InstantMeeting({ onMeetingCreated }: InstantMeetingProps
       <button
         onClick={createInstantMeeting}
         disabled={isLoading}
-        className="w-full bg-blue-600 text-white px-3 py-1.5 rounded-lg hover:bg-blue-700 
+        className="w-full bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 
         disabled:bg-blue-300 transition-all duration-200
-        flex items-center justify-center gap-1.5 font-medium text-xs
+        flex items-center justify-center gap-1.5 font-medium text-sm
         shadow-sm hover:shadow disabled:shadow-none
         transform hover:scale-105 disabled:scale-100
         cursor-pointer disabled:cursor-not-allowed"

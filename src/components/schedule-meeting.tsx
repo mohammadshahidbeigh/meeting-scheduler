@@ -75,13 +75,13 @@ export default function ScheduleMeeting({ onMeetingScheduled }: ScheduleMeetingP
 
   return (
     <div className="max-w-md mx-auto">
-      <div className="mb-4">
+      <div className="mb-4 sm:mb-6">
         <h2 className="text-lg font-semibold text-gray-900">Schedule a Meeting</h2>
         <p className="mt-0.5 text-xs text-gray-500">
           Plan a meeting for a future date and time
         </p>
       </div>
-      <form onSubmit={scheduleMeeting} className="space-y-3">
+      <form onSubmit={scheduleMeeting} className="space-y-3 sm:space-y-4">
         <div>
           <label htmlFor="title" className="block text-xs font-medium text-gray-500 mb-0.5">
             Meeting Title
@@ -92,64 +92,67 @@ export default function ScheduleMeeting({ onMeetingScheduled }: ScheduleMeetingP
             id="title"
             required
             placeholder="Team Sync"
-            className="w-full px-3 py-1.5 rounded-lg border border-gray-300 text-gray-900 text-sm
+            className="w-full px-3 py-2 rounded-lg border border-gray-300 text-gray-900 text-sm
                      focus:ring-2 focus:ring-blue-500 focus:border-blue-500
                      placeholder:text-gray-400"
           />
         </div>
-        <div>
-          <label htmlFor="date" className="block text-xs font-medium text-gray-500 mb-0.5">
-            Date
-          </label>
-          <input
-            type="date"
-            id="date"
-            name="date"
-            min={today}
-            value={selectedDate}
-            onChange={(e) => {
-              setSelectedDate(e.target.value);
-              setSelectedTime('');
-            }}
-            className="w-full px-3 py-1.5 rounded-lg border border-gray-300 text-gray-900 text-sm
-                     focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-                     cursor-pointer"
-          />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div>
+            <label htmlFor="date" className="block text-xs font-medium text-gray-500 mb-0.5">
+              Date
+            </label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              min={today}
+              value={selectedDate}
+              onChange={(e) => {
+                setSelectedDate(e.target.value);
+                setSelectedTime('');
+              }}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 text-gray-900 text-sm
+                       focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                       cursor-pointer"
+            />
+          </div>
+          <div>
+            <label htmlFor="time" className="block text-xs font-medium text-gray-500 mb-0.5">
+              Time
+            </label>
+            <select
+              id="time"
+              name="time"
+              value={selectedTime}
+              onChange={(e) => setSelectedTime(e.target.value)}
+              required
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 text-gray-900 text-sm
+                       focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                       cursor-pointer appearance-none bg-white
+                       bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22%236b7280%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M10%203a1%201%200%2001.707.293l3%203a1%201%200%2001-1.414%201.414L10%205.414%207.707%207.707a1%201%200%2001-1.414-1.414l3-3A1%201%200%200110%203zm-3.707%209.293a1%201%200%20011.414%200L10%2014.586l2.293-2.293a1%201%200%20011.414%201.414l-3%203a1%201%200%2001-1.414%200l-3-3a1%201%200%20010-1.414z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E')]
+                       bg-no-repeat bg-[right_0.75rem_center] bg-[length:0.875rem_0.875rem]"
+            >
+              <option value="" disabled>Select a time</option>
+              {timeSlots.map((slot) => (
+                <option key={slot.value} value={slot.value}>
+                  {slot.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-        <div>
-          <label htmlFor="time" className="block text-xs font-medium text-gray-500 mb-0.5">
-            Time
-          </label>
-          <select
-            id="time"
-            name="time"
-            value={selectedTime}
-            onChange={(e) => setSelectedTime(e.target.value)}
-            required
-            className="w-full px-3 py-1.5 rounded-lg border border-gray-300 text-gray-900 text-sm
-                     focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-                     cursor-pointer appearance-none bg-white
-                     bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22%236b7280%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M10%203a1%201%200%2001.707.293l3%203a1%201%200%2001-1.414%201.414L10%205.414%207.707%207.707a1%201%200%2001-1.414-1.414l3-3A1%201%200%200110%203zm-3.707%209.293a1%201%200%20011.414%200L10%2014.586l2.293-2.293a1%201%200%20011.414%201.414l-3%203a1%201%200%2001-1.414%200l-3-3a1%201%200%20010-1.414z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E')]
-                     bg-no-repeat bg-[right_0.75rem_center] bg-[length:0.875rem_0.875rem]"
-          >
-            <option value="" disabled>Select a time</option>
-            {timeSlots.map((slot) => (
-              <option key={slot.value} value={slot.value}>
-                {slot.label}
-              </option>
-            ))}
-          </select>
-        </div>
+        
         <button
           type="submit"
           disabled={isLoading || !selectedTime}
-          className="w-full bg-blue-600 text-white px-3 py-1.5 rounded-lg hover:bg-blue-700 
+          className="w-full bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 
           disabled:bg-blue-300 transition-all duration-200
-          flex items-center justify-center gap-1.5 font-medium text-xs
+          flex items-center justify-center gap-1.5 font-medium text-sm
           shadow-sm hover:shadow disabled:shadow-none
           transform hover:scale-105 disabled:scale-100
           cursor-pointer disabled:cursor-not-allowed
-          mt-4"
+          mt-4 sm:mt-6"
         >
           {isLoading ? (
             <>

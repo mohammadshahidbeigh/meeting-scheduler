@@ -67,15 +67,15 @@ export default function Home() {
     <div className="min-h-screen bg-[#f0f7ff]">
       {/* Top Navigation Bar */}
       <nav className="bg-white shadow-md border-b sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6">
-          <div className="flex justify-between h-14">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16">
             <div className="flex items-center">
-              <h1 className="text-xl font-extrabold text-gray-900 tracking-tight px-3 py-1.5 ml-6">
+              <h1 className="text-xl font-extrabold text-gray-900 tracking-tight px-2 sm:px-3 py-1.5">
                 Meeting Scheduler
               </h1>
             </div>
             {session?.user && (
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 sm:gap-4">
                 <div className="flex items-center gap-2">
                   {session.user.image && (
                     <Image
@@ -86,11 +86,11 @@ export default function Home() {
                       className="rounded-full ring-2 ring-gray-200"
                     />
                   )}
-                  <span className="text-gray-900 font-medium text-sm">{session.user.name}</span>
+                  <span className="hidden sm:inline text-gray-900 font-medium text-sm">{session.user.name}</span>
                 </div>
                 <button
                   onClick={() => signOut()}
-                  className="text-xs text-red-600 hover:text-red-700 font-medium px-3 py-1.5 
+                  className="text-xs text-red-600 hover:text-red-700 font-medium px-2 sm:px-3 py-1.5 
                            border border-red-200 rounded-lg hover:bg-red-200 transition-all cursor-pointer"
                 >
                   Sign Out
@@ -102,13 +102,13 @@ export default function Home() {
       </nav>
 
       {/* Main Content */}
-      <main className="max-w-3xl mx-auto px-3 py-8 sm:px-4 lg:px-6">
-        {/* Meeting Type Selection */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+          {/* Meeting Type Selection */}
           <div className="grid grid-cols-2 gap-px bg-gray-100">
             <button
               onClick={() => handleTabChange('instant')}
-              className={`px-4 py-3 text-xs font-medium transition-all relative ${
+              className={`px-3 sm:px-4 py-3 text-xs font-medium transition-all relative ${
                 activeTab === 'instant'
                   ? 'bg-white text-gray-900 shadow-sm'
                   : 'bg-gray-50 text-gray-500 hover:text-gray-700 hover:bg-gray-100'
@@ -121,7 +121,7 @@ export default function Home() {
             </button>
             <button
               onClick={() => handleTabChange('scheduled')}
-              className={`px-4 py-3 text-xs font-medium transition-all relative ${
+              className={`px-3 sm:px-4 py-3 text-xs font-medium transition-all relative ${
                 activeTab === 'scheduled'
                   ? 'bg-white text-gray-900 shadow-sm'
                   : 'bg-gray-50 text-gray-500 hover:text-gray-700 hover:bg-gray-100'
@@ -134,7 +134,8 @@ export default function Home() {
             </button>
           </div>
 
-          <div className="p-6">
+          {/* Meeting Form */}
+          <div className="p-4 sm:p-6">
             {activeTab === 'instant' ? (
               <InstantMeeting onMeetingCreated={setMeetingDetails} />
             ) : (
@@ -142,23 +143,24 @@ export default function Home() {
             )}
 
             {meetingDetails && (
-              <div className="mt-6 p-6 bg-blue-50 rounded-xl border border-blue-100 shadow-lg">
-                <div className="flex items-center gap-2 mb-6">
+              <div className="mt-6 p-4 sm:p-6 bg-blue-50 rounded-xl border border-blue-100 shadow-lg">
+                <div className="flex items-center gap-2 mb-4 sm:mb-6">
                   <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
                   <h3 className="font-semibold text-sm text-gray-900">Meeting Created Successfully</h3>
                 </div>
-                <div className="space-y-6">
-                  <div className="grid grid-cols-2 gap-4 text-xs">
-                    <div className="bg-white p-4 rounded-lg border border-gray-100 shadow-sm">
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-xs">
+                    <div className="bg-white p-3 sm:p-4 rounded-lg border border-gray-100 shadow-sm">
                       <p className="text-gray-500 mb-1">Starts</p>
                       <p className="font-medium text-gray-900">{formatDateTime(meetingDetails.startTime)}</p>
                     </div>
-                    <div className="bg-white p-4 rounded-lg border border-gray-100 shadow-sm">
+                    <div className="bg-white p-3 sm:p-4 rounded-lg border border-gray-100 shadow-sm">
                       <p className="text-gray-500 mb-1">Ends</p>
                       <p className="font-medium text-gray-900">{formatDateTime(meetingDetails.endTime)}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
+                  
+                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                     <input
                       type="text"
                       value={meetingDetails.meetingLink}
@@ -187,6 +189,9 @@ export default function Home() {
                         </svg>
                       )}
                     </button>
+                  </div>
+                  
+                  <div className="flex justify-center sm:justify-start">
                     <a
                       href={meetingDetails.meetingLink}
                       target="_blank"
