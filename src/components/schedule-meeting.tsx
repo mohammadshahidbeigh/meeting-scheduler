@@ -75,15 +75,15 @@ export default function ScheduleMeeting({ onMeetingScheduled }: ScheduleMeetingP
 
   return (
     <div className="max-w-md mx-auto">
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-gray-900">Schedule a Meeting</h2>
-        <p className="mt-1 text-sm text-gray-500">
+      <div className="mb-4">
+        <h2 className="text-lg font-semibold text-gray-900">Schedule a Meeting</h2>
+        <p className="mt-0.5 text-xs text-gray-500">
           Plan a meeting for a future date and time
         </p>
       </div>
-      <form onSubmit={scheduleMeeting} className="space-y-4">
+      <form onSubmit={scheduleMeeting} className="space-y-3">
         <div>
-          <label htmlFor="title" className="block text-sm font-medium text-gray-500 mb-1">
+          <label htmlFor="title" className="block text-xs font-medium text-gray-500 mb-0.5">
             Meeting Title
           </label>
           <input
@@ -92,13 +92,13 @@ export default function ScheduleMeeting({ onMeetingScheduled }: ScheduleMeetingP
             id="title"
             required
             placeholder="Team Sync"
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 text-gray-900
+            className="w-full px-3 py-1.5 rounded-lg border border-gray-300 text-gray-900 text-sm
                      focus:ring-2 focus:ring-blue-500 focus:border-blue-500
                      placeholder:text-gray-400"
           />
         </div>
         <div>
-          <label htmlFor="date" className="block text-sm font-medium text-gray-500 mb-1">
+          <label htmlFor="date" className="block text-xs font-medium text-gray-500 mb-0.5">
             Date
           </label>
           <input
@@ -111,13 +111,13 @@ export default function ScheduleMeeting({ onMeetingScheduled }: ScheduleMeetingP
               setSelectedDate(e.target.value);
               setSelectedTime('');
             }}
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 text-gray-900
+            className="w-full px-3 py-1.5 rounded-lg border border-gray-300 text-gray-900 text-sm
                      focus:ring-2 focus:ring-blue-500 focus:border-blue-500
                      cursor-pointer"
           />
         </div>
         <div>
-          <label htmlFor="time" className="block text-sm font-medium text-gray-500 mb-1">
+          <label htmlFor="time" className="block text-xs font-medium text-gray-500 mb-0.5">
             Time
           </label>
           <select
@@ -126,11 +126,11 @@ export default function ScheduleMeeting({ onMeetingScheduled }: ScheduleMeetingP
             value={selectedTime}
             onChange={(e) => setSelectedTime(e.target.value)}
             required
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 text-gray-900
+            className="w-full px-3 py-1.5 rounded-lg border border-gray-300 text-gray-900 text-sm
                      focus:ring-2 focus:ring-blue-500 focus:border-blue-500
                      cursor-pointer appearance-none bg-white
                      bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22%236b7280%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M10%203a1%201%200%2001.707.293l3%203a1%201%200%2001-1.414%201.414L10%205.414%207.707%207.707a1%201%200%2001-1.414-1.414l3-3A1%201%200%200110%203zm-3.707%209.293a1%201%200%20011.414%200L10%2014.586l2.293-2.293a1%201%200%20011.414%201.414l-3%203a1%201%200%2001-1.414%200l-3-3a1%201%200%20010-1.414z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E')]
-                     bg-no-repeat bg-[right_0.95rem_center] bg-[length:1rem_1rem]"
+                     bg-no-repeat bg-[right_0.75rem_center] bg-[length:0.875rem_0.875rem]"
           >
             <option value="" disabled>Select a time</option>
             {timeSlots.map((slot) => (
@@ -143,22 +143,22 @@ export default function ScheduleMeeting({ onMeetingScheduled }: ScheduleMeetingP
         <button
           type="submit"
           disabled={isLoading || !selectedTime}
-          className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 
+          className="w-full bg-blue-600 text-white px-3 py-1.5 rounded-lg hover:bg-blue-700 
           disabled:bg-blue-300 transition-all duration-200
-          flex items-center justify-center gap-2 font-medium text-sm
+          flex items-center justify-center gap-1.5 font-medium text-xs
           shadow-sm hover:shadow disabled:shadow-none
           transform hover:scale-105 disabled:scale-100
           cursor-pointer disabled:cursor-not-allowed
-          mt-6"
+          mt-4"
         >
           {isLoading ? (
             <>
-              <div className="animate-spin rounded-full h-5 w-5 border-2 border-white/30 border-t-white"></div>
+              <div className="animate-spin rounded-full h-4 w-4 border-2 border-white/30 border-t-white"></div>
               Scheduling...
             </>
           ) : (
             <>
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                   d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
@@ -169,8 +169,8 @@ export default function ScheduleMeeting({ onMeetingScheduled }: ScheduleMeetingP
       </form>
 
       {error && (
-        <div className="mt-4 p-4 bg-red-50 rounded-lg">
-          <p className="text-sm text-red-600">{error}</p>
+        <div className="mt-3 p-3 bg-red-50 rounded-lg">
+          <p className="text-xs text-red-600">{error}</p>
         </div>
       )}
     </div>

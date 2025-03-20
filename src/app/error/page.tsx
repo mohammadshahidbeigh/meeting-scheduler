@@ -10,13 +10,13 @@ function ErrorContent() {
 
   return (
     <div className="text-center">
-      <h1 className="text-4xl font-bold text-red-600 mb-4">Authentication Error</h1>
-      <p className="text-gray-600 mb-4">
+      <h1 className="text-2xl font-bold text-red-600 mb-3">Authentication Error</h1>
+      <p className="text-sm text-gray-600 mb-3">
         {error || 'An error occurred during authentication'}
       </p>
       <Link
         href="/login"
-        className="text-blue-500 hover:text-blue-700 underline"
+        className="text-blue-500 hover:text-blue-700 underline text-sm"
       >
         Back to Login
       </Link>
@@ -29,7 +29,7 @@ export default function ErrorPage() {
     <div className="flex h-screen flex-col items-center justify-center">
       <Suspense fallback={
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-red-600 mb-4">Loading...</h1>
+          <h1 className="text-2xl font-bold text-red-600 mb-3">Loading...</h1>
         </div>
       }>
         <ErrorContent />

@@ -68,30 +68,30 @@ export default function Home() {
     <div className="min-h-screen bg-[#f0f7ff]">
       {/* Top Navigation Bar */}
       <nav className="bg-white shadow-md border-b sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
+        <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6">
+          <div className="flex justify-between h-14">
             <div className="flex items-center">
-              <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight px-4 py-2 ml-8">
+              <h1 className="text-xl font-extrabold text-gray-900 tracking-tight px-3 py-1.5 ml-6">
                 Meeting Scheduler
               </h1>
             </div>
             {session?.user && (
-              <div className="flex items-center gap-6">
-                <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
                   {session.user.image && (
                     <Image
                       src={session.user.image}
                       alt="Profile"
-                      width={40}
-                      height={40}
+                      width={32}
+                      height={32}
                       className="rounded-full ring-2 ring-gray-200"
                     />
                   )}
-                  <span className="text-gray-900 font-medium">{session.user.name}</span>
+                  <span className="text-gray-900 font-medium text-sm">{session.user.name}</span>
                 </div>
                 <button
                   onClick={() => signOut()}
-                  className="text-sm text-red-600 hover:text-red-700 font-medium px-4 py-2 
+                  className="text-xs text-red-600 hover:text-red-700 font-medium px-3 py-1.5 
                            border border-red-200 rounded-lg hover:bg-red-200 transition-all cursor-pointer"
                 >
                   Sign Out
@@ -103,13 +103,13 @@ export default function Home() {
       </nav>
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+      <main className="max-w-3xl mx-auto px-3 py-8 sm:px-4 lg:px-6">
         {/* Meeting Type Selection */}
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+        <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
           <div className="grid grid-cols-2 gap-px bg-gray-100">
             <button
               onClick={() => handleTabChange('instant')}
-              className={`px-6 py-4 text-sm font-medium transition-all relative ${
+              className={`px-4 py-3 text-xs font-medium transition-all relative ${
                 activeTab === 'instant'
                   ? 'bg-white text-gray-900 shadow-sm'
                   : 'bg-gray-50 text-gray-500 hover:text-gray-700 hover:bg-gray-100'
@@ -117,12 +117,12 @@ export default function Home() {
             >
               <span className="relative z-10">Start an Instant Meeting</span>
               {activeTab === 'instant' && (
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-blue-600 rounded-t-full"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-t-full"></div>
               )}
             </button>
             <button
               onClick={() => handleTabChange('scheduled')}
-              className={`px-6 py-4 text-sm font-medium transition-all relative ${
+              className={`px-4 py-3 text-xs font-medium transition-all relative ${
                 activeTab === 'scheduled'
                   ? 'bg-white text-gray-900 shadow-sm'
                   : 'bg-gray-50 text-gray-500 hover:text-gray-700 hover:bg-gray-100'
@@ -130,12 +130,12 @@ export default function Home() {
             >
               <span className="relative z-10">Schedule a Meeting</span>
               {activeTab === 'scheduled' && (
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-blue-600 rounded-t-full"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-t-full"></div>
               )}
             </button>
           </div>
 
-          <div className="p-10">
+          <div className="p-6">
             {activeTab === 'instant' ? (
               <InstantMeeting onMeetingCreated={setMeetingDetails} />
             ) : (
@@ -143,34 +143,34 @@ export default function Home() {
             )}
 
             {meetingDetails && (
-              <div className="mt-8 p-8 bg-blue-50 rounded-2xl border border-blue-100 shadow-lg">
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <h3 className="font-semibold text-base text-gray-900">Meeting Created Successfully</h3>
+              <div className="mt-6 p-6 bg-blue-50 rounded-xl border border-blue-100 shadow-lg">
+                <div className="flex items-center gap-2 mb-6">
+                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                  <h3 className="font-semibold text-sm text-gray-900">Meeting Created Successfully</h3>
                 </div>
-                <div className="space-y-8">
-                  <div className="grid grid-cols-2 gap-6 text-sm">
-                    <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
-                      <p className="text-gray-500 mb-2">Starts</p>
+                <div className="space-y-6">
+                  <div className="grid grid-cols-2 gap-4 text-xs">
+                    <div className="bg-white p-4 rounded-lg border border-gray-100 shadow-sm">
+                      <p className="text-gray-500 mb-1">Starts</p>
                       <p className="font-medium text-gray-900">{formatDateTime(meetingDetails.startTime)}</p>
                     </div>
-                    <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
-                      <p className="text-gray-500 mb-2">Ends</p>
+                    <div className="bg-white p-4 rounded-lg border border-gray-100 shadow-sm">
+                      <p className="text-gray-500 mb-1">Ends</p>
                       <p className="font-medium text-gray-900">{formatDateTime(meetingDetails.endTime)}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2">
                     <input
                       type="text"
                       value={meetingDetails.meetingLink}
                       readOnly
-                      className="flex-1 px-4 py-3 text-sm text-gray-900 bg-white border border-gray-200 
-                               rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                      className="flex-1 px-3 py-2 text-xs text-gray-900 bg-white border border-gray-200 
+                               rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500
                                shadow-sm hover:shadow-md transition-all"
                     />
                     <button
                       onClick={handleCopyLink}
-                      className={`p-3 rounded-xl transition-all ${
+                      className={`p-2 rounded-lg transition-all ${
                         isCopied 
                           ? 'text-green-600 bg-green-50 hover:bg-green-100' 
                           : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
@@ -178,11 +178,11 @@ export default function Home() {
                       title={isCopied ? "Copied!" : "Copy link"}
                     >
                       {isCopied ? (
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       ) : (
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                             d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                         </svg>
@@ -192,11 +192,11 @@ export default function Home() {
                       href={meetingDetails.meetingLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white 
-                               rounded-xl hover:bg-blue-700 transition-all font-medium text-sm
+                      className="inline-flex items-center gap-1.5 px-4 py-2 bg-blue-600 text-white 
+                               rounded-lg hover:bg-blue-700 transition-all font-medium text-xs
                                shadow-sm hover:shadow-md"
                     >
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                           d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
