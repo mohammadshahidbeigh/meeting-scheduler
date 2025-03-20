@@ -51,7 +51,7 @@ export default function Home() {
       <div className="flex h-screen flex-col items-center justify-center bg-[#f0f7ff]">
         <div className="text-center space-y-4 p-12 bg-white rounded-2xl shadow-lg max-w-md w-full mx-2">
           <h1 className="text-2xl font-bold text-gray-900">Welcome to Meeting Scheduler 📆</h1>
-          <p className="text-sm text-gray-600">Schedule and join meetings with ease⚡</p>
+          <p className="text-sm text-gray-600">Schedule and join meetings with ease 🤝⚡</p>
           <Link
             href="/login"
             className="block w-full bg-blue-600 text-white px-2 py-2 rounded-lg hover:bg-blue-700 transition-all font-medium text-center mt-2 text-sm text-gray-600" 
