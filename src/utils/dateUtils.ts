@@ -38,8 +38,6 @@ export function generateTimeSlots(selectedDate: string): Array<{ value: string, 
   const isToday = date.toDateString() === now.toDateString();
   
   const slots: Array<{ value: string, label: string }> = [];
-  const startHour = isToday ? now.getHours() : 0;
-  const startMinute = isToday ? now.getMinutes() : 0;
   
   // Start from the beginning of the next 15-minute slot
   let currentTime = new Date(date);
@@ -56,12 +54,10 @@ export function generateTimeSlots(selectedDate: string): Array<{ value: string, 
     const displayHours = hours % 12 || 12;
     
     const timeString = `${displayHours}:${minutes.toString().padStart(2, '0')}${ampm}`;
-    const minutesSuffix = minutes === 0 ? '0' : minutes;
-    const label = `${timeString} (${minutesSuffix} mins)`;
     
     slots.push({
       value: currentTime.toISOString(),
-      label
+      label: timeString
     });
     
     // Add 15 minutes

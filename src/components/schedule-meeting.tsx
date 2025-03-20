@@ -83,7 +83,7 @@ export default function ScheduleMeeting({ onMeetingScheduled }: ScheduleMeetingP
       </div>
       <form onSubmit={scheduleMeeting} className="space-y-4">
         <div>
-          <label htmlFor="title" className="block text-sm font-medium text-gray-500">
+          <label htmlFor="title" className="block text-sm font-medium text-gray-500 mb-1">
             Meeting Title
           </label>
           <input
@@ -92,12 +92,13 @@ export default function ScheduleMeeting({ onMeetingScheduled }: ScheduleMeetingP
             id="title"
             required
             placeholder="Team Sync"
-            className="mt-1 w-full px-4 py-2 rounded-lg border border-gray-300 text-gray-900
-                     focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 text-gray-900
+                     focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                     placeholder:text-gray-400"
           />
         </div>
         <div>
-          <label htmlFor="date" className="block text-sm font-medium text-gray-500">
+          <label htmlFor="date" className="block text-sm font-medium text-gray-500 mb-1">
             Date
           </label>
           <input
@@ -110,13 +111,14 @@ export default function ScheduleMeeting({ onMeetingScheduled }: ScheduleMeetingP
               setSelectedDate(e.target.value);
               setSelectedTime('');
             }}
-            className="mt-1 w-full px-4 py-2 rounded-lg border border-gray-300 text-gray-900
-                     focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 text-gray-900
+                     focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                     cursor-pointer"
           />
         </div>
         <div>
-          <label htmlFor="time" className="block text-sm font-medium text-gray-500">
-            Time Slot
+          <label htmlFor="time" className="block text-sm font-medium text-gray-500 mb-1">
+            Time
           </label>
           <select
             id="time"
@@ -124,10 +126,13 @@ export default function ScheduleMeeting({ onMeetingScheduled }: ScheduleMeetingP
             value={selectedTime}
             onChange={(e) => setSelectedTime(e.target.value)}
             required
-            className="mt-1 w-full px-4 py-2 rounded-lg border border-gray-300 text-gray-900
-                     focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 text-gray-900
+                     focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                     cursor-pointer appearance-none bg-white
+                     bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22%236b7280%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M10%203a1%201%200%2001.707.293l3%203a1%201%200%2001-1.414%201.414L10%205.414%207.707%207.707a1%201%200%2001-1.414-1.414l3-3A1%201%200%200110%203zm-3.707%209.293a1%201%200%20011.414%200L10%2014.586l2.293-2.293a1%201%200%20011.414%201.414l-3%203a1%201%200%2001-1.414%200l-3-3a1%201%200%20010-1.414z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E')]
+                     bg-no-repeat bg-[right_0.95rem_center] bg-[length:1rem_1rem]"
           >
-            <option value="">Select a time</option>
+            <option value="" disabled>Select a time</option>
             {timeSlots.map((slot) => (
               <option key={slot.value} value={slot.value}>
                 {slot.label}
@@ -143,7 +148,8 @@ export default function ScheduleMeeting({ onMeetingScheduled }: ScheduleMeetingP
           flex items-center justify-center gap-2 font-medium text-sm
           shadow-sm hover:shadow disabled:shadow-none
           transform hover:scale-105 disabled:scale-100
-          cursor-pointer disabled:cursor-not-allowed"
+          cursor-pointer disabled:cursor-not-allowed
+          mt-6"
         >
           {isLoading ? (
             <>
