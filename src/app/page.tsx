@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import InstantMeeting from '@/components/instant-meeting'
 import ScheduleMeeting from '@/components/schedule-meeting'
+import { formatDateTime } from '@/utils/dateUtils'
 
 interface MeetingDetails {
   meetingLink: string;
@@ -151,11 +152,11 @@ export default function Home() {
                   <div className="grid grid-cols-2 gap-6 text-sm">
                     <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
                       <p className="text-gray-500 mb-2">Starts</p>
-                      <p className="font-medium text-gray-900">{new Date(meetingDetails.startTime).toLocaleString()}</p>
+                      <p className="font-medium text-gray-900">{formatDateTime(meetingDetails.startTime)}</p>
                     </div>
                     <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
                       <p className="text-gray-500 mb-2">Ends</p>
-                      <p className="font-medium text-gray-900">{new Date(meetingDetails.endTime).toLocaleString()}</p>
+                      <p className="font-medium text-gray-900">{formatDateTime(meetingDetails.endTime)}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">

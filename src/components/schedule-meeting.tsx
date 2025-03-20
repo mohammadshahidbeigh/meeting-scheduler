@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { generateTimeSlots } from '@/utils/dateUtils'
 
 interface MeetingDetails {
   meetingLink: string;
@@ -16,22 +17,28 @@ interface ScheduleMeetingProps {
 export default function ScheduleMeeting({ onMeetingScheduled }: ScheduleMeetingProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string>('')
+  const [selectedDate, setSelectedDate] = useState<string>(new Date().toISOString().split('T')[0])
+  const [timeSlots, setTimeSlots] = useState<Array<{ value: string, label: string }>>([])
+  const [selectedTime, setSelectedTime] = useState<string>('')
+
+  useEffect(() => {
+    if (selectedDate) {
+      const slots = generateTimeSlots(selectedDate);
+      setTimeSlots(slots);
+      // Auto-select the first available time slot
+      if (slots.length > 0 && !selectedTime) {
+        setSelectedTime(slots[0].value);
+      }
+    }
+  }, [selectedDate]);
 
   const scheduleMeeting = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
-    const dateTime = formData.get('dateTime') as string
     const title = formData.get('title') as string
 
-    if (!dateTime || !title) {
+    if (!selectedTime || !title) {
       setError('Please fill in all required fields')
-      return
-    }
-
-    // Validate that the selected time is in the future
-    const selectedDate = new Date(dateTime)
-    if (selectedDate <= new Date()) {
-      setError('Please select a future date and time')
       return
     }
 
@@ -42,7 +49,10 @@ export default function ScheduleMeeting({ onMeetingScheduled }: ScheduleMeetingP
       const response = await fetch('/api/schedule-meeting', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ dateTime, title }),
+        body: JSON.stringify({ 
+          dateTime: selectedTime,
+          title 
+        }),
       })
 
       if (!response.ok) {
@@ -59,6 +69,9 @@ export default function ScheduleMeeting({ onMeetingScheduled }: ScheduleMeetingP
       setIsLoading(false)
     }
   }
+
+  // Get current date in YYYY-MM-DD format for the date input min attribute
+  const today = new Date().toISOString().split('T')[0]
 
   return (
     <div className="max-w-md mx-auto">
@@ -79,34 +92,58 @@ export default function ScheduleMeeting({ onMeetingScheduled }: ScheduleMeetingP
             id="title"
             required
             placeholder="Team Sync"
-            className="mt-1 w-full px-4 py-2 rounded-lg border border-gray-900 text-gray-900
-                     focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
-        <div>
-          <label htmlFor="dateTime" className="block text-sm font-medium text-gray-500">
-            Date and Time
-          </label>
-          <input
-            type="datetime-local"
-            name="dateTime"
-            id="dateTime"
-            required
-            min={new Date().toISOString().slice(0, 16)}
             className="mt-1 w-full px-4 py-2 rounded-lg border border-gray-300 text-gray-900
                      focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
+        <div>
+          <label htmlFor="date" className="block text-sm font-medium text-gray-500">
+            Date
+          </label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            min={today}
+            value={selectedDate}
+            onChange={(e) => {
+              setSelectedDate(e.target.value);
+              setSelectedTime('');
+            }}
+            className="mt-1 w-full px-4 py-2 rounded-lg border border-gray-300 text-gray-900
+                     focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+        <div>
+          <label htmlFor="time" className="block text-sm font-medium text-gray-500">
+            Time Slot
+          </label>
+          <select
+            id="time"
+            name="time"
+            value={selectedTime}
+            onChange={(e) => setSelectedTime(e.target.value)}
+            required
+            className="mt-1 w-full px-4 py-2 rounded-lg border border-gray-300 text-gray-900
+                     focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option value="">Select a time</option>
+            {timeSlots.map((slot) => (
+              <option key={slot.value} value={slot.value}>
+                {slot.label}
+              </option>
+            ))}
+          </select>
+        </div>
         <button
           type="submit"
-          disabled={isLoading}
+          disabled={isLoading || !selectedTime}
           className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 
           disabled:bg-blue-300 transition-all duration-200
           flex items-center justify-center gap-2 font-medium text-sm
           shadow-sm hover:shadow disabled:shadow-none
           transform hover:scale-105 disabled:scale-100
           cursor-pointer disabled:cursor-not-allowed"
-
         >
           {isLoading ? (
             <>

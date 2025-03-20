@@ -1,6 +1,6 @@
 import { auth } from '@/lib/auth'
 import { NextResponse } from 'next/server'
-import { createGoogleMeet } from '@/utils/googleCalendar'
+import { createInstantMeet } from '@/utils/googleCalendar'
 import { Session } from 'next-auth'
 
 export async function POST() {
@@ -14,7 +14,7 @@ export async function POST() {
   }
 
   try {
-    const meeting = await createGoogleMeet(session.user.accessToken)
+    const meeting = await createInstantMeet(session.user.accessToken)
     
     return NextResponse.json({
       meetingLink: meeting.meetingLink,

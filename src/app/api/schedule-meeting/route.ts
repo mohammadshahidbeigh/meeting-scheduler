@@ -13,7 +13,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { dateTime, duration = 30, title = "Scheduled Meeting" } = await request.json()
+    const { dateTime, title = "Scheduled Meeting" } = await request.json()
     
     if (!dateTime) {
       return NextResponse.json(
@@ -22,8 +22,27 @@ export async function POST(request: Request) {
       )
     }
 
+    // Parse the date string and create a new Date object
+    const startTime = new Date(dateTime)
+    
+    // Validate the date
+    if (isNaN(startTime.getTime())) {
+      return NextResponse.json(
+        { error: 'Invalid date format' },
+        { status: 400 }
+      )
+    }
+
+    // Ensure the meeting is scheduled in the future
+    if (startTime <= new Date()) {
+      return NextResponse.json(
+        { error: 'Meeting must be scheduled in the future' },
+        { status: 400 }
+      )
+    }
+
     const meeting = await createGoogleMeet(session.user.accessToken, {
-      startTime: new Date(dateTime),
+      startTime,
       summary: title,
       description: "Scheduled via Meeting Scheduler"
     })
