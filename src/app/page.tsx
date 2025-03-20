@@ -49,13 +49,12 @@ export default function Home() {
   if (!session) {
     return (
       <div className="flex h-screen flex-col items-center justify-center bg-[#f0f7ff]">
-        <div className="text-center space-y-6 p-8 bg-white rounded-2xl shadow-lg max-w-md w-full mx-4">
-          <h1 className="text-3xl font-bold text-gray-900">Welcome to Meeting Scheduler</h1>
-          <p className="text-gray-600">Schedule and join meetings with ease</p>
+        <div className="text-center space-y-4 p-12 bg-white rounded-2xl shadow-lg max-w-md w-full mx-2">
+          <h1 className="text-2xl font-bold text-gray-900">Welcome to Meeting Scheduler 📆</h1>
+          <p className="text-sm text-gray-600">Schedule and join meetings with ease⚡</p>
           <Link
             href="/login"
-            className="block w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 
-            transition-all font-medium text-center shadow-sm hover:shadow" 
+            className="block w-full bg-blue-600 text-white px-2 py-2 rounded-lg hover:bg-blue-700 transition-all font-medium text-center mt-2 text-sm text-gray-600" 
           >
             Sign In to Continue
           </Link>
